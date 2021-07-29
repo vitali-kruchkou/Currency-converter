@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { userEmail } from './constants';
 import { asyncResetPassword } from '@store/actions/authActions';
+import { AuthRoutes } from '@core/constants/routes';
 
 const PasswordReset = (): JSX.Element => {
   const [email, setEmail] = useState('');
@@ -53,7 +54,9 @@ const PasswordReset = (): JSX.Element => {
               </button>
             </Style.Button>
           </Form.Item>
-          <Link to="/signIn">&larr; {t('resetPassword.buttonBackSignIn')}</Link>
+          <Link to={AuthRoutes.signIn}>
+            &larr; {t('resetPassword.buttonBackSignIn')}
+          </Link>
         </Form>
       </Style.Form>
     </Style.Container>

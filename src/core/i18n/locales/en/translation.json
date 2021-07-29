@@ -8,6 +8,7 @@
     "buttonSignUp": "Sign up",
     "textBeforeGoogle": "Or Login Using",
     "textGoogle": "Google",
+    "extraInformation": "Extra information",
     "input": {
       "email": {
         "type": "email",

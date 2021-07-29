@@ -1,5 +1,3 @@
-import { ThunkAction } from 'redux-thunk';
-import { Action } from '@reduxjs/toolkit';
 import { ActionTypes } from '@store/actions/constans.d';
 
 export type User = {
@@ -71,6 +69,4 @@ export interface AuthState {
   user: User | null;
 }
 
-export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof rootReducer>;
-export type AppThunk = ThunkAction<void, RootState, Action<string>>;

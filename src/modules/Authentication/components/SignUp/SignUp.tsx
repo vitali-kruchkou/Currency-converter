@@ -122,7 +122,7 @@ const SignUp = (): JSX.Element => {
             </Style.Button>
             <Style.Links>
               <p> {t('signUp.textBeforeSignIn')}</p>
-              <Link to="/signIn">{t('signUp.buttonSignIn')}</Link>
+              <Link to={AuthRoutes.signIn}>{t('signUp.buttonSignIn')}</Link>
             </Style.Links>
           </Form.Item>
           <Divider plain>{t('signUp.textBeforeGoogle')}</Divider>

@@ -16,6 +16,7 @@ import {
   asyncSignInGoogle,
   asyncSignInAction,
 } from '@store/actions/authActions';
+import { AuthRoutes } from '@core/constants/routes';
 
 const SignIn = (): JSX.Element => {
   const [email, setEmail] = useState('');
@@ -67,7 +68,7 @@ const SignIn = (): JSX.Element => {
                 onChange={onChangeHandler}
                 prefix={<UserOutlined />}
                 suffix={
-                  <Tooltip title="Extra information">
+                  <Tooltip title={t('signIn.extraInformation')}>
                     <InfoCircleOutlined style={{ color: Color.AuthFormIcon }} />
                   </Tooltip>
                 }
@@ -95,11 +96,11 @@ const SignIn = (): JSX.Element => {
                 </button>
               </Style.Button>
               <Style.Links>
-                <Link to="/signUp">
+                <Link to={AuthRoutes.signUp}>
                   <span className="SignUp">{t('signIn.buttonSignUp')} </span>
                 </Link>{' '}
                 <br />
-                <Link to="/passwordReset">
+                <Link to={AuthRoutes.passwordReset}>
                   <span>{t('signIn.buttonForgetPassword')}</span>
                 </Link>
               </Style.Links>
