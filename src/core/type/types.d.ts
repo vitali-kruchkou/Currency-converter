@@ -6,6 +6,13 @@ export type User = {
   password?: string;
 };
 
+export type Currency = {
+  data?: Array;
+  course?: number;
+  fromCurrency?: string;
+  toCurrency?: string;
+};
+
 export type AuthActions =
   | SignInAction
   | SignUpAction
@@ -67,6 +74,36 @@ export interface AsyncResetPasswordAction {
 export interface AuthState {
   login: boolean;
   user: User | null;
+}
+
+export type CurrencyActions =
+  | GetCurrencyListAction
+  | AsyncGetCurrencyListAction
+  | GetCurrencyCourseAction
+  | AsyncGetConvertCourseAction;
+
+export interface GetCurrencyListAction {
+  type: typeof ActionTypes.GET_CURRENCY_LIST;
+  payload: Currency | null;
+}
+
+export interface AsyncGetCurrencyListAction {
+  type: typeof ActionTypes.ASYNC_GET_CURRENCY_LIST;
+}
+
+export interface GetCurrencyCourseAction {
+  type: typeof ActionTypes.GET_CURRENCY_COURSE;
+  payload: Currency | null;
+}
+
+export interface AsyncGetConvertCourseAction {
+  type: typeof ActionTypes.ASYNC_GET_CURRENCY_COURSE;
+  payload: Currency | null;
+}
+
+export interface CurrencyState {
+  data: Currency | null;
+  course: Currency | null;
 }
 
 export type RootState = ReturnType<typeof rootReducer>;
