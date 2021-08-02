@@ -73,5 +73,11 @@
     "signInSuccess": "Good!",
     "signUpSuccess": "Create account",
     "resetPasswordSuccess": "Please check your email!"
+  },
+  "converter": {
+    "amountText": "Amount to convert",
+    "labelFrom": "From",
+    "labelTo": "To",
+    "converterButton": "Convert"
   }
 }

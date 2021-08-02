@@ -1,5 +1,6 @@
 import { asyncGetConvertCourseAction } from '@store/actions/converterActions';
 import React, { useCallback, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 
 interface ConverterButtonProps {
@@ -16,7 +17,7 @@ const ConverterButton = ({
   handleConvertAmount,
 }: ConverterButtonProps): JSX.Element => {
   const dispatch = useDispatch();
-
+  const { t } = useTranslation();
   useEffect(() => {
     const currency = { fromCurrency, toCurrency };
     dispatch(asyncGetConvertCourseAction(currency));
@@ -33,7 +34,11 @@ const ConverterButton = ({
     }
   }, [amount, getCourse, handleConvertAmount]);
 
-  return <button onClick={handleConverCourse}>Convert</button>;
+  return (
+    <button onClick={handleConverCourse}>
+      {t('converter.converterButton')}
+    </button>
+  );
 };
 
 export default ConverterButton;

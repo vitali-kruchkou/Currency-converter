@@ -40,15 +40,9 @@ const CurryncyRow = ({
     }
   }, [list]);
 
-  // const { onChangeCurrency, value } = props;
-
   return (
     <>
-      <div
-        style={{
-          width: 500,
-          marginLeft: 100,
-        }}>
+      <div>
         {currencyList && (
           <Select
             className="react-select-container"

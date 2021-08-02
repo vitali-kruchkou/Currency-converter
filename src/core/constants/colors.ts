@@ -8,4 +8,6 @@ export enum Color {
   AuthGoogleButtonHover = '0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.25)',
   AuthButtonText = 'white',
   AuthButtonAccept = 'green',
+  ConvertContainerColor = 'rgb(235, 230, 230)',
+  ConverterContainerBoxShadow = '12px 11px 28px 0px rgba(34, 60, 80, 0.2)',
 }
