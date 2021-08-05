@@ -1,0 +1,129 @@
+import { addCurrencyList, getCurrencyList } from '@firebaseConfig/index';
+import React, { useCallback, useEffect, useState, MouseEvent } from 'react';
+import { RootStateOrAny, useSelector } from 'react-redux';
+import Style from './StyledProfileCurrency';
+import { Button, Input } from 'antd';
+import { FindCoursePlaceholder, noSort, sortA_Z, sortZ_A } from './constants';
+import { useTranslation } from 'react-i18next';
+import toast from 'react-hot-toast';
+import i18n from '@core/i18n';
+
+const ProfileCurrency = (): JSX.Element => {
+  const [favCurrency, setFavCurrency] = useState([]);
+  const user = useSelector((state: RootStateOrAny) => state.currentAuth.user);
+  const [counter, setCounter] = useState(0);
+  const [search, setSearch] = useState('');
+  const [filterCourse, setFilterCourse] = useState([]);
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    try {
+      getCurrencyList(user, setFavCurrency);
+    } catch {
+      toast.error(`${i18n.t('toasts.errorGetCurrencyList')}`);
+    }
+  }, [user]);
+
+  const handleSortzA_Z = useCallback(() => {
+    const sorted = [...favCurrency].sort((a, b) =>
+      a.split(' ')[1].localeCompare(b.split(' ')[1]),
+    );
+    setFavCurrency(sorted);
+  }, [favCurrency]);
+
+  const handleSortzZ_A = useCallback(() => {
+    const sorted = [...favCurrency].sort((a, b) =>
+      b.split(' ')[1].localeCompare(a.split(' ')[1]),
+    );
+    setFavCurrency(sorted);
+  }, [favCurrency]);
+
+  const handleNoSort = useCallback(() => {
+    getCurrencyList(user, setFavCurrency);
+  }, [user]);
+
+  const handleSortButton = useCallback(() => {
+    let count = counter;
+    count = count !== 2 ? count + 1 : 0;
+    setCounter(count);
+    switch (counter) {
+      case 0: {
+        handleSortzA_Z();
+        break;
+      }
+      case 1: {
+        handleSortzZ_A();
+        break;
+      }
+      case 2: {
+        handleNoSort();
+        break;
+      }
+      default: {
+        return;
+      }
+    }
+  }, [counter, handleSortzA_Z, handleSortzZ_A, handleNoSort]);
+
+  const handleInputValue = useCallback(event => {
+    event.preventDefault();
+    const searhCurrency = event.target.value;
+    setSearch(searhCurrency);
+  }, []);
+
+  useEffect(() => {
+    const filterCoursesList = [...favCurrency].filter(item => {
+      return (
+        item.split(' ')[1].toLowerCase().includes(search) ||
+        item.split(' ')[1].includes(search)
+      );
+    });
+    setFilterCourse(filterCoursesList);
+  }, [favCurrency, search]);
+
+  const handleDelete = useCallback(
+    (index: number) => (event: MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      const taskList: string[] = [...filterCourse];
+      taskList.splice(index, 1);
+      setFilterCourse(taskList);
+      addCurrencyList(taskList, user);
+      toast.success(`${i18n.t('toasts.deleteFromFavoriteCurrency')}`);
+    },
+    [filterCourse, user],
+  );
+
+  return (
+    <>
+      <Style.Container>
+        <Button type="primary" onClick={handleSortButton}>
+          {counter === 0 ? noSort : counter === 1 ? sortA_Z : sortZ_A}
+        </Button>
+        <Style.Input>
+          <Input
+            placeholder={FindCoursePlaceholder}
+            type="text"
+            onChange={handleInputValue}
+          />
+        </Style.Input>
+        <Style.Lists>
+          {favCurrency && favCurrency.length > 0 ? (
+            filterCourse.map((item, index) => (
+              <Style.List key={index}>
+                <p>{item}</p>
+                <Button type="primary" danger onClick={handleDelete(index)}>
+                  {' '}
+                  X
+                </Button>
+              </Style.List>
+            ))
+          ) : (
+            <div>{t('currentList.noFavCurrency')}</div>
+          )}
+        </Style.Lists>
+      </Style.Container>
+    </>
+  );
+};
+
+export default ProfileCurrency;

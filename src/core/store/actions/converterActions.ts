@@ -5,6 +5,9 @@ import {
   Currency,
   GetCurrencyCourseAction,
   AsyncGetConvertCourseAction,
+  GetCurrencyCourseListAction,
+  AsyncGetCurrencyCourseListAction,
+  GetCurrencyErrorAction,
 } from '@type/types';
 
 export const getCurrencyListAction = (
@@ -30,4 +33,20 @@ export const asyncGetConvertCourseAction = (
 ): AsyncGetConvertCourseAction => ({
   type: ActionTypes.ASYNC_GET_CURRENCY_COURSE,
   payload: currency,
+});
+
+export const getCurrencyCourseListAction = (
+  currency: Currency | null,
+): GetCurrencyCourseListAction => ({
+  type: ActionTypes.GET_CURRENCY_COURSE_LIST,
+  payload: currency,
+});
+
+export const asyncGetCurrencyCourseListAction =
+  (): AsyncGetCurrencyCourseListAction => ({
+    type: ActionTypes.ASYNC_GET_CURRENCY_COURSE_LIST,
+  });
+
+export const getCurrencyErrorAction = (): GetCurrencyErrorAction => ({
+  type: ActionTypes.GET_CURRENCY_ERROR,
 });

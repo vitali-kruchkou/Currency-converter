@@ -6,7 +6,8 @@ import Authentication from '@modules/Authentication/Authentication';
 import { generateUserDocument, auth, database } from '@firebaseConfig/index';
 import { signInAction } from '@store/actions/authActions';
 import HomePage from '@modules/HomePage';
-import Converter from '@modules/ConverterPage/Converter';
+// import HomePage from '@modules/HomePage';
+// import Converter from '@modules/ConverterPage/Converter';
 
 const Routes: React.FC = () => {
   const user = useSelector((state: RootStateOrAny) => state.currentAuth);
@@ -22,20 +23,20 @@ const Routes: React.FC = () => {
     });
   }, [dispatch]);
 
-  // return user.login ? (
-  //   <>
-  //     <Toaster />
-  //     <Router>
-  //       <HomePage />
-  //     </Router>
-  //   </>
-  // ) : (
-  //   <Router>
-  //     <Authentication />
-  //   </Router>
-  // );
+  return user.login ? (
+    <>
+      <Toaster />
+      <Router>
+        <HomePage />
+      </Router>
+    </>
+  ) : (
+    <Router>
+      <Authentication />
+    </Router>
+  );
 
-  return <Converter />;
+  // return <List />;
 };
 
 export default Routes;

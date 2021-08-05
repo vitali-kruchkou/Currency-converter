@@ -1,5 +1,8 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
-import { getCurrencyListAction } from '@store/actions/converterActions';
+import {
+  getCurrencyErrorAction,
+  getCurrencyListAction,
+} from '@store/actions/converterActions';
 import { ActionTypes } from '@store/actions/constans.d';
 
 function fetchData() {
@@ -13,7 +16,7 @@ export function* workerGetCurrencyList(): Generator {
     const data = yield call(fetchData);
     yield put(getCurrencyListAction(data));
   } catch {
-    console.log('Error');
+    yield put(getCurrencyErrorAction());
   }
 }
 

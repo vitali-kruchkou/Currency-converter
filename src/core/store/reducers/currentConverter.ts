@@ -4,6 +4,7 @@ import { ActionTypes } from '@store/actions/constans.d';
 const initialState: CurrencyState = {
   data: null as null,
   course: null as null,
+  courseList: null as null,
 };
 
 const currentConverter = (
@@ -21,6 +22,12 @@ const currentConverter = (
       return {
         ...state,
         course: action.payload,
+      };
+    }
+    case ActionTypes.GET_CURRENCY_COURSE_LIST: {
+      return {
+        ...state,
+        courseList: action.payload,
       };
     }
     default:

@@ -30,6 +30,13 @@ const Styled = {
   Label: styled.label`
     font-size: 15px;
   `,
+  Buttons: styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  `,
 };
 
 export default Styled;

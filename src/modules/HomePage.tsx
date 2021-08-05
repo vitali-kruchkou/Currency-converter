@@ -1,23 +1,23 @@
-import React, { useCallback } from 'react';
-import { asyncSignOutAction } from '@store/actions/authActions';
-import { useDispatch } from 'react-redux';
-import { Button } from 'antd';
-import { useTranslation } from 'react-i18next';
+import { AuthRoutes } from '@core/constants/routes';
+import React from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import Converter from './ConverterPage/Converter';
+import CurrentList from './CurrentListPage/CurrentListPage';
+import SecondPage from './SecondPage/SecondPage';
 
-const Home = (): JSX.Element => {
-  const dispatch = useDispatch();
-  const { t } = useTranslation();
-
-  const signOut = useCallback(() => {
-    dispatch(asyncSignOutAction());
-  }, [dispatch]);
-
+const HomePage = (): JSX.Element => {
   return (
     <>
-      <h1>Home</h1>
-      <Button onClick={signOut}>{t('signOut.buttonSignOut')}</Button>
+      <Switch>
+        <Route path={AuthRoutes.profile} component={SecondPage} />
+        <Route path={AuthRoutes.convert} component={Converter} />
+        <Route path={AuthRoutes.currentlist} component={CurrentList} />
+        <Route path="/">
+          <Redirect to={AuthRoutes.convert} />
+        </Route>
+      </Switch>
     </>
   );
 };
 
-export default Home;
+export default HomePage;

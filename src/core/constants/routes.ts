@@ -3,4 +3,7 @@ export enum AuthRoutes {
   signUp = '/signUp',
   passwordReset = '/passwordReset',
   home = '/home',
+  currentlist = '/currentlist',
+  profile = '/profile',
+  convert = '/convert',
 }

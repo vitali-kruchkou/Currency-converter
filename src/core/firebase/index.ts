@@ -4,6 +4,7 @@ import '@firebase/storage';
 import '@firebase/firestore';
 import '@firebase/database';
 import config from './firebaseConfig';
+import { UserProps } from '@type/types';
 
 const firebaseApp = !firebase.apps.length
   ? firebase.initializeApp(config)
@@ -53,4 +54,27 @@ const getUserDocument = async (uid: string) => {
   } catch (error) {
     console.error('Error fetching user', error);
   }
+};
+
+export const addCurrencyList = (currency: string[], user: UserProps): void => {
+  firestore.collection('currency').doc(user.uid).set({
+    currency: currency,
+  });
+};
+
+export const getCurrencyList = (
+  user: UserProps,
+  setCurrencyList: any,
+): void => {
+  event.preventDefault();
+  firestore
+    .collection('currency')
+    .doc(user.uid)
+    .get()
+    .then(doc => {
+      if (doc.exists) {
+        // setCurrencyList(doc.data().currency);
+        setCurrencyList(Array.from(new Set(doc.data().currency)));
+      }
+    });
 };

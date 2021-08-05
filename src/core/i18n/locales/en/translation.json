@@ -72,12 +72,20 @@
   "toasts": {
     "signInSuccess": "Good!",
     "signUpSuccess": "Create account",
-    "resetPasswordSuccess": "Please check your email!"
+    "resetPasswordSuccess": "Please check your email!",
+    "errorGetCurrencyList": "Error",
+    "addFavoriteCurrency": "Add to favorite Currency",
+    "deleteFromFavoriteCurrency": "Delete"
   },
   "converter": {
     "amountText": "Amount to convert",
     "labelFrom": "From",
     "labelTo": "To",
     "converterButton": "Convert"
+  },
+  "currentList": {
+    "noFavCurrency": "No Favorite Currency",
+    "currentListButtonGoBack": "Go Back",
+    "currentListButtonGoProfilePage": "Profile Page"
   }
 }

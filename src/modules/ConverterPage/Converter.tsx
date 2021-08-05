@@ -5,8 +5,11 @@ import { asyncGetCurrencyListAction } from '@store/actions/converterActions';
 import ConverterButton from './components/Buttons/ConverterButton';
 import SwitchButton from './components/Buttons/SwicthButtons';
 import Style from './StyledConverter';
-import { Input } from 'antd';
+import { Button, Input } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router-dom';
+import { asyncSignOutAction } from '@store/actions/authActions';
+import { AuthRoutes } from '@core/constants/routes';
 
 const Converter = (): JSX.Element => {
   const [fromCurrency, setFromCurrency] = useState();
@@ -15,7 +18,7 @@ const Converter = (): JSX.Element => {
   const [convertAmount, setConvertAmount] = useState();
   const { t } = useTranslation();
   const dispatch = useDispatch();
-
+  const history = useHistory();
   useEffect(() => {
     dispatch(asyncGetCurrencyListAction());
   }, [dispatch]);
@@ -41,8 +44,24 @@ const Converter = (): JSX.Element => {
     setToCurrency(fromCurrency);
   }, [fromCurrency, toCurrency]);
 
+  const historyGoCurrentList = useCallback(() => {
+    history.push(AuthRoutes.currentlist);
+  }, [history]);
+
+  const signOut = useCallback(() => {
+    dispatch(asyncSignOutAction());
+  }, [dispatch]);
+
   return (
     <>
+      <Style.Buttons>
+        <Button type="ghost" onClick={signOut}>
+          {t('signOut.buttonSignOut')}
+        </Button>
+        <Button type="ghost" onClick={historyGoCurrentList}>
+          Current List
+        </Button>
+      </Style.Buttons>
       <Style.Container>
         <Style.AmountText>{t('converter.amountText')}</Style.AmountText>
         <Input type="number" onChange={handleFromAmount} />

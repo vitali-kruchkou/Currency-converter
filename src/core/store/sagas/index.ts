@@ -5,6 +5,7 @@ import watchAuthSignInGoogle from './authSaga/signInGoogleSaga';
 import watchAuthSignIn from './authSaga/signInSaga';
 import watchAuthSignUp from './authSaga/signUpSaga';
 import watchGetCurrencyCourse from './converterSaga/getCurrencyCourse';
+import watchGetCurrencyCourseList from './converterSaga/getCurrencyCourseList';
 import watchGetCurrencyList from './converterSaga/getCurrentListSaga';
 
 export default function* rootSaga(): Generator {
@@ -16,5 +17,6 @@ export default function* rootSaga(): Generator {
     watchAuthSignOut(),
     watchGetCurrencyList(),
     watchGetCurrencyCourse(),
+    watchGetCurrencyCourseList(),
   ]);
 }
