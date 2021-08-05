@@ -6,6 +6,7 @@ import Select, { components } from 'react-select';
 export function IconOption(Comp: any) {
   return function SelectComponent(props: any): JSX.Element {
     const { data } = props;
+
     return (
       <>
         <Comp {...props}>

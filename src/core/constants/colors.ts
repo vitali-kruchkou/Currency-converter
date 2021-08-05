@@ -10,4 +10,10 @@ export enum Color {
   AuthButtonAccept = 'green',
   ConvertContainerColor = 'rgb(235, 230, 230)',
   ConverterContainerBoxShadow = '12px 11px 28px 0px rgba(34, 60, 80, 0.2)',
+  ProfileCurrencyListsColorText = 'green',
+  ProfileCurrencyListsBG = 'black',
+  ProfileCurrencyListBorder = '2px dashed green',
+  CurrentListPageColorText = 'green',
+  CurrentListPageBG = 'black',
+  CurrentListPageBorder = '2px dashed green',
 }

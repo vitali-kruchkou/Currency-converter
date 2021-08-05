@@ -1,5 +1,8 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
-import { getConvertCoureseAction } from '@store/actions/converterActions';
+import {
+  getConvertCoureseAction,
+  getCurrencyErrorAction,
+} from '@store/actions/converterActions';
 import { ActionTypes } from '@store/actions/constans.d';
 import { AsyncGetConvertCourseAction } from '@type/types';
 
@@ -32,7 +35,7 @@ export function* workerGetCurrencyCourse(
       yield put(getConvertCoureseAction(data));
     }
   } catch {
-    console.log('Error');
+    yield put(getCurrencyErrorAction());
   }
 }
 
