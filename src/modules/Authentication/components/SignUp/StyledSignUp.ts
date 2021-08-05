@@ -67,6 +67,13 @@ const Style = {
     justify-content: space-between;
     margin: 20px 0;
   `,
+  Field: styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 200px;
+  `,
 };
 
 export default Style;

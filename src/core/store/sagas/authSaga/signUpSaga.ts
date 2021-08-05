@@ -13,8 +13,8 @@ export const workerAuthSignUp = function* (
     if (authChannel) {
       yield put(signUpAction(authChannel));
     }
-  } catch {
-    yield put(signErrorAction());
+  } catch (error) {
+    yield put(signErrorAction(error.message));
   }
 };
 

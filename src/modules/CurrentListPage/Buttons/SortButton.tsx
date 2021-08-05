@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { asyncGetCurrencyCourseListAction } from '@store/actions/converterActions';
 import { Button } from 'antd';
 import React, { useCallback, useState } from 'react';
@@ -17,7 +17,6 @@ const SortButton = ({
   const dispatch = useDispatch();
 
   const [counter, setCounter] = useState(0);
-  console.log(coursesList);
 
   const handleSortzA_Z = useCallback(() => {
     const sorted = [...coursesList].sort((a, b) =>

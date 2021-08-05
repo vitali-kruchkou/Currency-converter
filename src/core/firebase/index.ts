@@ -64,7 +64,7 @@ export const addCurrencyList = (currency: string[], user: UserProps): void => {
 
 export const getCurrencyList = (
   user: UserProps,
-  setCurrencyList: any,
+  setCurrencyList: (value: Array<UserProps>) => void,
 ): void => {
   event.preventDefault();
   firestore

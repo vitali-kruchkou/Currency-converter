@@ -6,6 +6,10 @@ export type User = {
   password?: string;
 };
 
+export type ErrorAuth = {
+  type?: string;
+};
+
 export type Currency = {
   data?: Array;
   course?: number;
@@ -46,6 +50,7 @@ export interface SignOutAction {
 
 export interface SignErrorAction {
   type: typeof ActionTypes.SIGN_ERROR;
+  payload: ErrorAuth | null;
 }
 
 export interface AsyncSignOutAction {
@@ -59,7 +64,6 @@ export interface AsyncSignInAction {
 
 export interface AsyncSignInGoogleAction {
   type: typeof ActionTypes.ASYNC_SIGN_IN_GOOGLE;
-  payload: User | null;
 }
 
 export interface AsyncSignUpAction {
@@ -75,6 +79,7 @@ export interface AsyncResetPasswordAction {
 export interface AuthState {
   login: boolean;
   user: User | null;
+  error: ErrorAuth | null;
 }
 
 export type CurrencyActions =

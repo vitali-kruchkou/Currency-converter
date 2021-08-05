@@ -25,6 +25,7 @@ const CurrentList = (): JSX.Element => {
   const [selected, setSelected] = useState([]);
   const history = useHistory();
   const { t } = useTranslation();
+  const today = new Date();
 
   const user = useSelector((state: RootStateOrAny) => state.currentAuth.user);
   const dispatch = useDispatch();
@@ -100,6 +101,9 @@ const CurrentList = (): JSX.Element => {
             onChange={handleInputValue}
           />
         </Style.Input>
+        <h1>
+          {t('currentList.course')} {today.toLocaleDateString()}
+        </h1>
         <Style.Lists>
           {coursesList &&
             filterCourse.map((item: CourseListItem) => (

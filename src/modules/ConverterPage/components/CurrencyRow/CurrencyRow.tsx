@@ -1,24 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
 import { RootStateOrAny, useSelector } from 'react-redux';
-import SelectOption from './SelectOption';
-import Select, { components } from 'react-select';
-
-export function IconOption(Comp: any) {
-  return function SelectComponent(props: any): JSX.Element {
-    const { data } = props;
-
-    return (
-      <>
-        <Comp {...props}>
-          <SelectOption data={data} />
-        </Comp>
-      </>
-    );
-  };
-}
+import { Select } from 'antd';
 
 interface CurryncyRowProps {
-  value: number | string;
+  value: any;
   onChangeCurrency: (value: number) => void;
   amount?: undefined;
 }
@@ -28,7 +14,7 @@ const CurryncyRow = ({
   value,
 }: CurryncyRowProps): JSX.Element => {
   const [currencyList, setCurrencyList] = useState(null);
-
+  const { Option } = Select;
   const list = useSelector(
     (state: RootStateOrAny) => state.currentConverter.data,
   );
@@ -44,22 +30,20 @@ const CurryncyRow = ({
   return (
     <>
       <div>
-        {currencyList && (
-          <Select
-            className="react-select-container"
-            options={currencyList}
-            onChange={onChangeCurrency}
-            value={currencyList.filter(function (option: string) {
-              return option === value;
-            })}
-            placeholder="Select Currency"
-            getOptionLabel={option => option}
-            components={{
-              Option: IconOption(components.Option),
-              SingleValue: IconOption(components.SingleValue),
-            }}
-          />
-        )}
+        <Select
+          style={{ width: 120 }}
+          onChange={onChangeCurrency}
+          value={value}>
+          {currencyList &&
+            currencyList.map((option: string, index: number) => (
+              <Option value={option} key={index}>
+                <i
+                  className={`currency-flag currency-flag-${option.toLowerCase()}`}
+                />
+                {option}
+              </Option>
+            ))}
+        </Select>
       </div>
     </>
   );

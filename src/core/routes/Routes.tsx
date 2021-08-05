@@ -6,8 +6,6 @@ import Authentication from '@modules/Authentication/Authentication';
 import { generateUserDocument, auth, database } from '@firebaseConfig/index';
 import { signInAction } from '@store/actions/authActions';
 import HomePage from '@modules/HomePage';
-// import HomePage from '@modules/HomePage';
-// import Converter from '@modules/ConverterPage/Converter';
 
 const Routes: React.FC = () => {
   const user = useSelector((state: RootStateOrAny) => state.currentAuth);

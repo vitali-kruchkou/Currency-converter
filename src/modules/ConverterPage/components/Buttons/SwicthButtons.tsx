@@ -9,8 +9,8 @@ const SwitchButton = ({
   handleSwitchCourse,
 }: SwitchButtonProps): JSX.Element => {
   return (
-    <button>
-      <SwapOutlined onClick={handleSwitchCourse} />
+    <button onClick={handleSwitchCourse}>
+      <SwapOutlined />
     </button>
   );
 };

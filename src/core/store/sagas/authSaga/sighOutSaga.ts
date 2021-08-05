@@ -7,8 +7,8 @@ export const workerAuthSignOut = function* (): Generator {
   try {
     yield call(signOut);
     yield put(signOutAction());
-  } catch {
-    yield put(signErrorAction());
+  } catch (error) {
+    yield put(signErrorAction(error.message));
   }
 };
 

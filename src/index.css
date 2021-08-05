@@ -15,3 +15,12 @@ code {
 .Active {
   color:yellow;
 }
+
+.error {
+  color: red;
+  align-self: flex-end;
+  font-size: 12px;
+  font-style: italic;
+  padding-bottom: 10px;
+  line-height: 3px;
+}

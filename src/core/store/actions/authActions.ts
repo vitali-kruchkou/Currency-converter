@@ -5,6 +5,7 @@ import {
   AsyncSignInGoogleAction,
   AsyncSignOutAction,
   AsyncSignUpAction,
+  ErrorAuth,
   ResetPasswordAction,
   SignErrorAction,
   SignInAction,
@@ -39,9 +40,10 @@ export const resetPasswordAction = (): ResetPasswordAction => {
   };
 };
 
-export const signErrorAction = (): SignErrorAction => {
+export const signErrorAction = (error: ErrorAuth): SignErrorAction => {
   return {
     type: ActionTypes.SIGN_ERROR,
+    payload: error,
   };
 };
 
@@ -58,12 +60,9 @@ export const asyncSignOutAction = (): AsyncSignOutAction => {
   };
 };
 
-export const asyncSignInGoogle = (
-  user: User | null,
-): AsyncSignInGoogleAction => {
+export const asyncSignInGoogle = (): AsyncSignInGoogleAction => {
   return {
     type: ActionTypes.ASYNC_SIGN_IN_GOOGLE,
-    payload: user,
   };
 };
 

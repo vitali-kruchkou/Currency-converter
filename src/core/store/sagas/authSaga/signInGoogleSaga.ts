@@ -9,8 +9,8 @@ export const workerAuthSignInGoogle = function* (): Generator {
     if (authChannel) {
       yield put(signInAction(authChannel));
     }
-  } catch {
-    yield put(signErrorAction());
+  } catch (error) {
+    yield put(signErrorAction(error.message));
   }
 };
 

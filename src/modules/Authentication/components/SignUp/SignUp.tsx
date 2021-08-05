@@ -1,71 +1,50 @@
-import React, { useCallback, useState } from 'react';
-import { Form, Input, Divider, Tooltip } from 'antd';
-import { UserOutlined, InfoCircleOutlined } from '@ant-design/icons';
+import React, { useCallback } from 'react';
+import { Input, Divider, Tooltip } from 'antd';
 import { Link, useHistory } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Style from './StyledSignUp';
-import { useDispatch } from 'react-redux';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
-import { displayFirstName, userEmail, userPassword } from './constants';
 import { useTranslation } from 'react-i18next';
 import { AuthRoutes } from '@core/constants/routes';
+import { asyncSignInGoogle, asyncSignUp } from '@store/actions/authActions';
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
+import { UserOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import { Color } from '@core/constants/colors';
-import { ActionTypes } from '@store/actions/constans.d';
-import { asyncSignUp } from '@store/actions/authActions';
 
 const SignUp = (): JSX.Element => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [displayName, setDisplayName] = useState('');
   const history = useHistory();
   const dispatch = useDispatch();
   const { t } = useTranslation();
-
-  const onChangeHandlerEmail = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const { name, value } = event.currentTarget;
-      if (name === userEmail) {
-        setEmail(value);
-      }
-    },
-    [],
+  const errorAuth = useSelector(
+    (state: RootStateOrAny) => state.currentAuth.error,
   );
 
-  const onChangeHandlerPassword = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const { name, value } = event.currentTarget;
-      if (name === userPassword) {
-        setPassword(value);
-      }
+  const formik = useFormik({
+    initialValues: {
+      displayName: '',
+      email: '',
+      password: '',
     },
-    [],
-  );
-
-  const onChangeHandlerName = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const { name, value } = event.currentTarget;
-      if (name === displayFirstName) {
-        setDisplayName(value);
-      }
-    },
-    [],
-  );
-
-  const createUser = useCallback(
-    (event: React.SyntheticEvent) => {
+    validationSchema: Yup.object().shape({
+      email: Yup.string()
+        .email('Invalid email address')
+        .required('Please enter email'),
+      password: Yup.string().required('Please enter password'),
+    }),
+    onSubmit: values => {
+      const { email, password } = values;
       const user = { email, password };
-      event.preventDefault();
       dispatch(asyncSignUp(user));
+      errorAuth && toast.error(`${errorAuth}`);
       history.push(AuthRoutes.home);
     },
-    [dispatch, history, email, password],
-  );
+  });
 
   const logginGoogle = useCallback(() => {
     try {
-      dispatch({
-        type: ActionTypes.ASYNC_SIGN_IN_GOOGLE,
-      });
+      dispatch(asyncSignInGoogle());
     } catch (error) {
       toast.error(error.message);
     }
@@ -75,65 +54,66 @@ const SignUp = (): JSX.Element => {
     <Style.Container>
       <Toaster />
       <Style.Form>
-        <Form>
+        <form className="form" onSubmit={formik.handleSubmit}>
           <Style.Title>{t('signUp.title')}</Style.Title>
-          <Form.Item>
+          <Style.Field>
             <Input
               type={t('signUp.input.displayName.type')}
               name={t('signUp.input.displayName.name')}
               placeholder={t('signUp.input.displayName.placeholder')}
               id={t('signUp.input.displayName.id')}
-              value={displayName}
-              onChange={onChangeHandlerName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.displayName}
               prefix={<UserOutlined />}
             />
-          </Form.Item>
-          <Form.Item>
             <Input
               type={t('signUp.input.email.type')}
               name={t('signUp.input.email.name')}
               placeholder={t('signUp.input.email.placeholder')}
-              id={t('signUp.input.email.id')}
-              value={email}
-              onChange={onChangeHandlerEmail}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.email}
               prefix={<UserOutlined />}
             />
-          </Form.Item>
-          <Form.Item>
+            {formik.touched.email && formik.errors.email ? (
+              <span className="error">{formik.errors.email}</span>
+            ) : null}
             <Input.Password
               type={t('signUp.input.password.type')}
               name={t('signUp.input.password.name')}
               placeholder={t('signUp.input.password.placeholder')}
               id={t('signUp.input.password.id')}
-              value={password}
-              onChange={onChangeHandlerPassword}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.password}
               suffix={
                 <Tooltip title="Extra information">
                   <InfoCircleOutlined style={{ color: Color.AuthFormIcon }} />
                 </Tooltip>
               }
             />
-          </Form.Item>
-          <Form.Item>
+            {formik.touched.password && formik.errors.password ? (
+              <span className="error">{formik.errors.password}</span>
+            ) : null}
             <Style.Button>
-              <button className="SignUp" onClick={createUser}>
+              <button type="submit" className="SignUp">
                 {t('signUp.buttonSignUp')}
               </button>
             </Style.Button>
-            <Style.Links>
-              <p> {t('signUp.textBeforeSignIn')}</p>
-              <Link to={AuthRoutes.signIn}>{t('signUp.buttonSignIn')}</Link>
-            </Style.Links>
-          </Form.Item>
-          <Divider plain>{t('signUp.textBeforeGoogle')}</Divider>
-          <Form.Item>
-            <Style.Button onClick={logginGoogle}>
-              <button onClick={logginGoogle}>
-                {t('signUp.buttonSignInGoogle')}
-              </button>
-            </Style.Button>
-          </Form.Item>
-        </Form>
+          </Style.Field>
+        </form>
+        <Style.Links>
+          <p> {t('signUp.textBeforeSignIn')}</p>
+          <Link to={AuthRoutes.signIn}>{t('signUp.buttonSignIn')}</Link>
+        </Style.Links>
+
+        <Divider plain>{t('signUp.textBeforeGoogle')}</Divider>
+        <Style.Button>
+          <button onClick={logginGoogle}>
+            {t('signUp.buttonSignInGoogle')}
+          </button>
+        </Style.Button>
       </Style.Form>
     </Style.Container>
   );

@@ -1,6 +1,7 @@
 const initialState: AuthState = {
   login: false as boolean,
   user: null as null,
+  error: null as null,
 };
 import { ActionTypes } from '@store/actions/constans.d';
 import { AuthActions, AuthState } from '@type/types';
@@ -41,6 +42,7 @@ const currentAuth = (
       return {
         ...state,
         login: false,
+        error: action.payload,
       };
     }
     default:

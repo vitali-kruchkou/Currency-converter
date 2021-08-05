@@ -14,8 +14,8 @@ export const workerAuthResetPassword = function* (
   try {
     yield call(resetPassword, email);
     yield put(resetPasswordAction());
-  } catch {
-    yield put(signErrorAction());
+  } catch (error) {
+    yield put(signErrorAction(error.message));
   }
 };
 
