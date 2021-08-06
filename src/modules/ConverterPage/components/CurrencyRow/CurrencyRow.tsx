@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import { Select } from 'antd';
-
+import Style from './StyledCurrencyRow';
 interface CurryncyRowProps {
   value: any;
   onChangeCurrency: (value: number) => void;
@@ -29,11 +29,8 @@ const CurryncyRow = ({
 
   return (
     <>
-      <div>
-        <Select
-          style={{ width: 120 }}
-          onChange={onChangeCurrency}
-          value={value}>
+      <Style.Select>
+        <Select onChange={onChangeCurrency} value={value}>
           {currencyList &&
             currencyList.map((option: string, index: number) => (
               <Option value={option} key={index}>
@@ -44,7 +41,7 @@ const CurryncyRow = ({
               </Option>
             ))}
         </Select>
-      </div>
+      </Style.Select>
     </>
   );
 };

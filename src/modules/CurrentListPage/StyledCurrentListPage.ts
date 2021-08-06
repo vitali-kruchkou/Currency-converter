@@ -39,16 +39,32 @@ const Style = {
   `,
   List: styled.li`
     width: 400px;
+    padding: 0 20px;
     height: 50px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     border: ${Color.CurrentListPageBorder};
     margin: 5px auto;
     text-align: center;
-    & > p {
-      margin: 0;
+    cursor: cell;
+    & > button {
+      background-color:#44c767;
+	    border-radius:28px;
+	    border:1px solid #18ab29;
+	    display:inline-block;
+	    cursor:pointer;
+	    color:#ffffff;
+	    font-family:Arial;
+	    font-size:17px;
+	    padding:8px 15px;
+	    text-decoration:none;
+	    text-shadow:0px 1px 0px #2f6627;
+    &:hover {
+      background-color:#5cbf2a;
+}
+  }
     }
     @media (max-width: ${Adaptive.notebook}) {
       max-width: 300px;

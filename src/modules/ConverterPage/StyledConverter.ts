@@ -26,6 +26,10 @@ const Styled = {
   `,
   Select: styled.div`
     width: 300px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
   `,
   Label: styled.label`
     font-size: 15px;

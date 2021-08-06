@@ -45,7 +45,10 @@ const CurrentList = (): JSX.Element => {
   }, [getCourseList]);
 
   const handleCourseList = useCallback(event => {
-    setChooseCourse(prevState => [...prevState, event.target.innerText]);
+    setChooseCourse(prevState => [
+      ...prevState,
+      event.target.parentNode.innerText.split('+')[0],
+    ]);
     toast.success(`${i18n.t('toasts.addFavoriteCurrency')}`);
   }, []);
 
@@ -82,6 +85,8 @@ const CurrentList = (): JSX.Element => {
     history.push(AuthRoutes.profile);
   }, [history]);
 
+  console.log(chooseCourse);
+
   return (
     <>
       <Style.Buttons>
@@ -109,16 +114,14 @@ const CurrentList = (): JSX.Element => {
             filterCourse.map((item: CourseListItem) => (
               <Style.List
                 key={item.Cur_ID}
-                onClick={handleCourseList}
                 className={
                   selected.includes(item.Cur_Abbreviation)
                     ? 'Active'
                     : undefined
                 }>
-                <p>
-                  {defaultInitialValue} {item.Cur_Abbreviation} ={' '}
-                  {item.Cur_OfficialRate} {defaultCurrency}
-                </p>
+                {defaultInitialValue} {item.Cur_Abbreviation} ={' '}
+                {item.Cur_OfficialRate} {defaultCurrency}
+                <button onClick={handleCourseList}>+</button>
               </Style.List>
             ))}
         </Style.Lists>

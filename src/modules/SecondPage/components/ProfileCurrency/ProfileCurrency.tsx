@@ -110,7 +110,7 @@ const ProfileCurrency = (): JSX.Element => {
           {favCurrency && favCurrency.length > 0 ? (
             filterCourse.map((item, index) => (
               <Style.List key={index}>
-                <p>{item}</p>
+                {item}
                 <Button type="primary" danger onClick={handleDelete(index)}>
                   {' '}
                   X

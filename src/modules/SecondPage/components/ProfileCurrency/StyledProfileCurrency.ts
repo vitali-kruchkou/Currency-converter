@@ -47,7 +47,8 @@ const Style = {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding: 0 20px;
     border: ${Color.ProfileCurrencyListBorder};
     margin: 5px auto;
     text-align: center;
