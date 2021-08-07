@@ -82,6 +82,9 @@ const Style = {
     align-items: center;
     justify-content: space-between;
   `,
+  Data: styled.h1`
+    color: ${Color.CurrentListDate};
+  `,
 };
 
 export default Style;

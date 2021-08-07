@@ -88,5 +88,8 @@
     "currentListButtonGoBack": "Go Back",
     "currentListButtonGoProfilePage": "Profile Page",
     "course": "Курс на"
+  },
+  "secondPage": {
+    "buttonGoBack": "Go Back"
   }
 }

@@ -16,4 +16,5 @@ export enum Color {
   CurrentListPageColorText = 'green',
   CurrentListPageBG = 'black',
   CurrentListPageBorder = '2px dashed green',
+  CurrentListDate = 'green;',
 }

@@ -4,10 +4,12 @@ import ProfileCurrency from './components/ProfileCurrency/ProfileCurrency';
 import ProfilePage from './components/ProfilePage/ProfilePage';
 import Style from './StyledSecondPage';
 import { useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const SecondPage = (): JSX.Element => {
   const { TabPane } = Tabs;
   const history = useHistory();
+  const { t } = useTranslation();
 
   const handleGoBack = useCallback(() => {
     history.goBack();
@@ -15,8 +17,8 @@ const SecondPage = (): JSX.Element => {
 
   return (
     <>
-      <Button type="ghost" onClick={handleGoBack}>
-        Go Back
+      <Button type="primary" onClick={handleGoBack}>
+        {t('secondPage.buttonGoBack')}
       </Button>
       <Style.Container>
         <Tabs defaultActiveKey="1">

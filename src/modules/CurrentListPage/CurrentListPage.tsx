@@ -85,8 +85,6 @@ const CurrentList = (): JSX.Element => {
     history.push(AuthRoutes.profile);
   }, [history]);
 
-  console.log(chooseCourse);
-
   return (
     <>
       <Style.Buttons>

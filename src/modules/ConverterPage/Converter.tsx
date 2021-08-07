@@ -36,7 +36,7 @@ const Converter = (): JSX.Element => {
   }, []);
 
   const handleConvertAmount = useCallback(event => {
-    setConvertAmount(event);
+    setConvertAmount(event.toFixed(4));
   }, []);
 
   const handleSwitchCourse = useCallback(() => {
