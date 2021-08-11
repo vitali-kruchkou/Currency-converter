@@ -5,6 +5,7 @@ const initialState: CurrencyState = {
   data: null as null,
   course: null as null,
   courseList: null as null,
+  favouriteCourse: null as null,
 };
 
 const currentConverter = (
@@ -28,6 +29,12 @@ const currentConverter = (
       return {
         ...state,
         courseList: action.payload,
+      };
+    }
+    case ActionTypes.GET_CURRENCY_LIST_FIREBASE: {
+      return {
+        ...state,
+        favouriteCourse: action.payload,
       };
     }
     default:

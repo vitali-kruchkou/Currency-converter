@@ -16,6 +16,7 @@ export type Currency = {
   fromCurrency?: string;
   toCurrency?: string;
   courseList?: Array;
+  favouriteCourse?: Array;
 };
 
 export type AuthActions =
@@ -89,7 +90,9 @@ export type CurrencyActions =
   | AsyncGetConvertCourseAction
   | GetCurrencyCourseListAction
   | AsyncGetCurrencyCourseListAction
-  | GetCurrencyErrorAction;
+  | GetCurrencyErrorAction
+  | GetCurrencyListFirebaseAction
+  | AsyncGetCurrencyListFirebaseAction;
 
 export interface GetCurrencyListAction {
   type: typeof ActionTypes.GET_CURRENCY_LIST;
@@ -119,6 +122,16 @@ export interface AsyncGetCurrencyCourseListAction {
   type: typeof ActionTypes.ASYNC_GET_CURRENCY_COURSE_LIST;
 }
 
+export interface GetCurrencyListFirebaseAction {
+  type: typeof ActionTypes.GET_CURRENCY_LIST_FIREBASE;
+  payload: Currency | null;
+}
+
+export interface AsyncGetCurrencyListFirebaseAction {
+  type: typeof ActionTypes.ASYNC_GET_CURRENCY_LIST_FIREBASE;
+  payload: UserProps | null;
+}
+
 export interface GetCurrencyErrorAction {
   type: typeof ActionTypes.GET_CURRENCY_ERROR;
 }
@@ -127,6 +140,7 @@ export interface CurrencyState {
   data: Currency | null;
   course: Currency | null;
   courseList: Currency | null;
+  favouriteCourse: Currency | null;
 }
 
 export type RootState = ReturnType<typeof rootReducer>;

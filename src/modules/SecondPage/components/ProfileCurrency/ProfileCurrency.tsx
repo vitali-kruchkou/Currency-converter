@@ -1,28 +1,35 @@
-import { addCurrencyList, getCurrencyList } from '@firebaseConfig/index';
+import { addCurrencyList } from '@firebaseConfig/index';
 import React, { useCallback, useEffect, useState, MouseEvent } from 'react';
-import { RootStateOrAny, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Style from './StyledProfileCurrency';
 import { Button, Input } from 'antd';
 import { FindCoursePlaceholder, noSort, sortA_Z, sortZ_A } from './constants';
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 import i18n from '@core/i18n';
+import { asyncGetCurrencyListFirabseAction } from '@store/actions/converterActions';
+import {
+  FavouriteCourseSelector,
+  UserSelecotor,
+} from '@store/selectors/selectors';
 
 const ProfileCurrency = (): JSX.Element => {
   const [favCurrency, setFavCurrency] = useState([]);
-  const user = useSelector((state: RootStateOrAny) => state.currentAuth.user);
+  const user = useSelector(UserSelecotor);
   const [counter, setCounter] = useState(0);
   const [search, setSearch] = useState('');
   const [filterCourse, setFilterCourse] = useState([]);
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const favcor = useSelector(FavouriteCourseSelector);
 
   useEffect(() => {
-    try {
-      getCurrencyList(user, setFavCurrency);
-    } catch {
-      toast.error(`${i18n.t('toasts.errorGetCurrencyList')}`);
-    }
-  }, [user]);
+    dispatch(asyncGetCurrencyListFirabseAction(user));
+  }, [user, dispatch]);
+
+  useEffect(() => {
+    favcor && setFavCurrency(favcor);
+  }, [favcor]);
 
   const handleSortzA_Z = useCallback(() => {
     const sorted = [...favCurrency].sort((a, b) =>
@@ -39,8 +46,8 @@ const ProfileCurrency = (): JSX.Element => {
   }, [favCurrency]);
 
   const handleNoSort = useCallback(() => {
-    getCurrencyList(user, setFavCurrency);
-  }, [user]);
+    dispatch(asyncGetCurrencyListFirabseAction(user));
+  }, [user, dispatch]);
 
   const handleSortButton = useCallback(() => {
     let count = counter;
@@ -89,8 +96,9 @@ const ProfileCurrency = (): JSX.Element => {
       setFilterCourse(taskList);
       addCurrencyList(taskList, user);
       toast.success(`${i18n.t('toasts.deleteFromFavoriteCurrency')}`);
+      dispatch(asyncGetCurrencyListFirabseAction(user));
     },
-    [filterCourse, user],
+    [filterCourse, user, dispatch],
   );
 
   return (

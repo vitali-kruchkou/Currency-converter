@@ -2,6 +2,7 @@ import { AuthRoutes } from '@core/constants/routes';
 import i18n from '@core/i18n';
 import { addCurrencyList } from '@firebaseConfig/index';
 import { asyncGetCurrencyCourseListAction } from '@store/actions/converterActions';
+import { UserSelecotor } from '@store/selectors/selectors';
 import { CourseListItem } from '@type/types';
 import { Button, Input } from 'antd';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -27,7 +28,7 @@ const CurrentList = (): JSX.Element => {
   const { t } = useTranslation();
   const today = new Date();
 
-  const user = useSelector((state: RootStateOrAny) => state.currentAuth.user);
+  const user = useSelector(UserSelecotor);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -64,7 +65,7 @@ const CurrentList = (): JSX.Element => {
   }, []);
 
   useEffect(() => {
-    const filterCoursesList = [...coursesList].filter(item => {
+    const filterCoursesList = coursesList.filter(item => {
       return (
         item.Cur_Abbreviation.toLowerCase().includes(search) ||
         item.Cur_Abbreviation.includes(search)

@@ -8,6 +8,9 @@ import {
   GetCurrencyCourseListAction,
   AsyncGetCurrencyCourseListAction,
   GetCurrencyErrorAction,
+  GetCurrencyListFirebaseAction,
+  AsyncGetCurrencyListFirebaseAction,
+  UserProps,
 } from '@type/types';
 
 export const getCurrencyListAction = (
@@ -49,4 +52,18 @@ export const asyncGetCurrencyCourseListAction =
 
 export const getCurrencyErrorAction = (): GetCurrencyErrorAction => ({
   type: ActionTypes.GET_CURRENCY_ERROR,
+});
+
+export const getCurrencyListFirebaseAction = (
+  currency: Currency | null,
+): GetCurrencyListFirebaseAction => ({
+  type: ActionTypes.GET_CURRENCY_LIST_FIREBASE,
+  payload: currency,
+});
+
+export const asyncGetCurrencyListFirabseAction = (
+  user: UserProps | null,
+): AsyncGetCurrencyListFirebaseAction => ({
+  type: ActionTypes.ASYNC_GET_CURRENCY_LIST_FIREBASE,
+  payload: user,
 });

@@ -1,7 +1,8 @@
 import { asyncGetConvertCourseAction } from '@store/actions/converterActions';
+import { GetCourseSelector } from '@store/selectors/selectors';
 import React, { useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 interface ConverterButtonProps {
   fromCurrency: string;
@@ -23,9 +24,7 @@ const ConverterButton = ({
     dispatch(asyncGetConvertCourseAction(currency));
   }, [fromCurrency, toCurrency, dispatch]);
 
-  const getCourse = useSelector(
-    (state: RootStateOrAny) => state.currentConverter.course,
-  );
+  const getCourse = useSelector(GetCourseSelector);
 
   const handleConverCourse = useCallback(() => {
     if (getCourse) {

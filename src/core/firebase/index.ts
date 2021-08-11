@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import firebase from '@firebase/app';
 import '@firebase/auth';
 import '@firebase/storage';
@@ -62,19 +63,14 @@ export const addCurrencyList = (currency: string[], user: UserProps): void => {
   });
 };
 
-export const getCurrencyList = (
-  user: UserProps,
-  setCurrencyList: (value: Array<UserProps>) => void,
-): void => {
-  event.preventDefault();
-  firestore
+export const getCurrencyList = (userUid: string) => {
+  return firestore
     .collection('currency')
-    .doc(user.uid)
+    .doc(userUid)
     .get()
     .then(doc => {
       if (doc.exists) {
-        // setCurrencyList(doc.data().currency);
-        setCurrencyList(Array.from(new Set(doc.data().currency)));
+        return Array.from(new Set(doc.data().currency));
       }
     });
 };

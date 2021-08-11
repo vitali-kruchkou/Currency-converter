@@ -3,19 +3,18 @@ import { Link } from 'react-router-dom';
 import { Form, Input } from 'antd';
 import toast, { Toaster } from 'react-hot-toast';
 import Style from './StyledPasswordReset';
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { userEmail } from './constants';
 import { asyncResetPassword } from '@store/actions/authActions';
 import { AuthRoutes } from '@core/constants/routes';
+import { ErrorAuthSelector } from '@store/selectors/selectors';
 
 const PasswordReset = (): JSX.Element => {
   const [email, setEmail] = useState('');
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const errorAuth = useSelector(
-    (state: RootStateOrAny) => state.currentAuth.error,
-  );
+  const errorAuth = useSelector(ErrorAuthSelector);
 
   const onChangeHandler = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,9 +1,10 @@
+import { UserSelecotor } from '@store/selectors/selectors';
 import React from 'react';
-import { RootStateOrAny, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Style from './StyledProfilePage';
 
 const ProfilePage = (): JSX.Element => {
-  const user = useSelector((state: RootStateOrAny) => state.currentAuth.user);
+  const user = useSelector(UserSelecotor);
 
   return (
     <>

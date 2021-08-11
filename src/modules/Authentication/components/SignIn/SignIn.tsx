@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Input, Divider, Tooltip } from 'antd';
 import toast, { Toaster } from 'react-hot-toast';
 import {
@@ -19,13 +19,12 @@ import {
 import { AuthRoutes } from '@core/constants/routes';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { ErrorAuthSelector } from '@store/selectors/selectors';
 
 const SignIn = (): JSX.Element => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const errorAuth = useSelector(
-    (state: RootStateOrAny) => state.currentAuth.error,
-  );
+  const errorAuth = useSelector(ErrorAuthSelector);
 
   const logginGoogle = useCallback(() => {
     dispatch(asyncSignInGoogle());

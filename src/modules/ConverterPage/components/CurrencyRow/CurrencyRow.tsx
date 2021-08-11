@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
-import { RootStateOrAny, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Select } from 'antd';
 import Style from './StyledCurrencyRow';
+import { CurrencyListSelector } from '@store/selectors/selectors';
 interface CurryncyRowProps {
   value: any;
   onChangeCurrency: (value: number) => void;
@@ -15,9 +16,7 @@ const CurryncyRow = ({
 }: CurryncyRowProps): JSX.Element => {
   const [currencyList, setCurrencyList] = useState(null);
   const { Option } = Select;
-  const list = useSelector(
-    (state: RootStateOrAny) => state.currentConverter.data,
-  );
+  const list = useSelector(CurrencyListSelector);
 
   useEffect(() => {
     if (list) {

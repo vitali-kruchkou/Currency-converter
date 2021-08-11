@@ -3,7 +3,7 @@ import { Input, Divider, Tooltip } from 'antd';
 import { Link, useHistory } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Style from './StyledSignUp';
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { AuthRoutes } from '@core/constants/routes';
@@ -12,14 +12,13 @@ import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { UserOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import { Color } from '@core/constants/colors';
+import { ErrorAuthSelector } from '@store/selectors/selectors';
 
 const SignUp = (): JSX.Element => {
   const history = useHistory();
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const errorAuth = useSelector(
-    (state: RootStateOrAny) => state.currentAuth.error,
-  );
+  const errorAuth = useSelector(ErrorAuthSelector);
 
   const formik = useFormik({
     initialValues: {
