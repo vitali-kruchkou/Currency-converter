@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { asyncGetCurrencyCourseListAction } from '@store/actions/converterActions';
+import { CourseListItem } from '@type/types';
 import { Button } from 'antd';
 import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -7,7 +8,7 @@ import { noSort, sortZ_A, sortA_Z } from '../constants';
 
 interface SortButtonProps {
   coursesList: string[] | number[] | any[];
-  setCoursesList: (value: string[]) => void;
+  setCoursesList?: (value: CourseListItem[]) => void;
 }
 
 const SortButton = ({
@@ -16,7 +17,7 @@ const SortButton = ({
 }: SortButtonProps): JSX.Element => {
   const dispatch = useDispatch();
 
-  const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useState<number>(0);
 
   const handleSortzA_Z = useCallback(() => {
     const sorted = [...coursesList].sort((a, b) =>

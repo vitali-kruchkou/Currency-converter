@@ -12,13 +12,14 @@ import { asyncSignOutAction } from '@store/actions/authActions';
 import { AuthRoutes } from '@core/constants/routes';
 
 const Converter = (): JSX.Element => {
-  const [fromCurrency, setFromCurrency] = useState();
-  const [toCurrency, setToCurrency] = useState();
-  const [amount, setAmount] = useState();
-  const [convertAmount, setConvertAmount] = useState();
+  const [fromCurrency, setFromCurrency] = useState<string>('');
+  const [toCurrency, setToCurrency] = useState<string>('');
+  const [amount, setAmount] = useState<number>(0);
+  const [convertAmount, setConvertAmount] = useState<string>('');
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const history = useHistory();
+
   useEffect(() => {
     dispatch(asyncGetCurrencyListAction());
   }, [dispatch]);

@@ -14,11 +14,11 @@ import {
 } from '@store/selectors/selectors';
 
 const ProfileCurrency = (): JSX.Element => {
-  const [favCurrency, setFavCurrency] = useState([]);
+  const [favCurrency, setFavCurrency] = useState<Array<string>>([]);
   const user = useSelector(UserSelecotor);
-  const [counter, setCounter] = useState(0);
-  const [search, setSearch] = useState('');
-  const [filterCourse, setFilterCourse] = useState([]);
+  const [counter, setCounter] = useState<number>(0);
+  const [search, setSearch] = useState<string>('');
+  const [filterCourse, setFilterCourse] = useState<Array<string>>([]);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const favcor = useSelector(FavouriteCourseSelector);

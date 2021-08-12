@@ -19,11 +19,12 @@ import {
 import Style from './StyledCurrentListPage';
 
 const CurrentList = (): JSX.Element => {
-  const [coursesList, setCoursesList] = useState([]);
-  const [chooseCourse, setChooseCourse] = useState([]);
-  const [search, setSearch] = useState('');
-  const [filterCourse, setFilterCourse] = useState([]);
-  const [selected, setSelected] = useState([]);
+  const [coursesList, setCoursesList] = useState<Array<CourseListItem>>([]);
+  const [chooseCourse, setChooseCourse] = useState<Array<string>>([]);
+  const [search, setSearch] = useState<string>('');
+  const [filterCourse, setFilterCourse] = useState<Array<CourseListItem>>([]);
+  const [selected, setSelected] = useState<Array<string>>([]);
+
   const history = useHistory();
   const { t } = useTranslation();
   const today = new Date();

@@ -7,14 +7,14 @@ import { CurrencyListSelector } from '@store/selectors/selectors';
 interface CurryncyRowProps {
   value: any;
   onChangeCurrency: (value: number) => void;
-  amount?: undefined;
+  amount?: number;
 }
 
 const CurryncyRow = ({
   onChangeCurrency,
   value,
 }: CurryncyRowProps): JSX.Element => {
-  const [currencyList, setCurrencyList] = useState(null);
+  const [currencyList, setCurrencyList] = useState<Array<string>>(null);
   const { Option } = Select;
   const list = useSelector(CurrencyListSelector);
 

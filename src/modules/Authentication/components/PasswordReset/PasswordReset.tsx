@@ -11,7 +11,7 @@ import { AuthRoutes } from '@core/constants/routes';
 import { ErrorAuthSelector } from '@store/selectors/selectors';
 
 const PasswordReset = (): JSX.Element => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState<string>('');
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const errorAuth = useSelector(ErrorAuthSelector);
