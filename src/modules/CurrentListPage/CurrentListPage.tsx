@@ -55,7 +55,7 @@ const CurrentList = (): JSX.Element => {
   }, []);
 
   useEffect(() => {
-    const arr = [...chooseCourse].map(item => item.split(' ')[1]);
+    const arr = chooseCourse.map(item => item.split(' ')[1]);
     setSelected(arr);
   }, [chooseCourse]);
 

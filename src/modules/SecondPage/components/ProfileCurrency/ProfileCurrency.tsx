@@ -79,7 +79,7 @@ const ProfileCurrency = (): JSX.Element => {
   }, []);
 
   useEffect(() => {
-    const filterCoursesList = [...favCurrency].filter(item => {
+    const filterCoursesList = favCurrency.filter(item => {
       return (
         item.split(' ')[1].toLowerCase().includes(search) ||
         item.split(' ')[1].includes(search)
@@ -117,7 +117,7 @@ const ProfileCurrency = (): JSX.Element => {
         <Style.Lists>
           {favCurrency && favCurrency.length > 0 ? (
             filterCourse.map((item, index) => (
-              <Style.List key={index}>
+              <Style.List key={item.split(' ')[3]}>
                 {item}
                 <Button type="primary" danger onClick={handleDelete(index)}>
                   {' '}
