@@ -1,1 +1,1 @@
-# Innowise-Lab-Internship-Level-2-Currency-converter
+Currency-converter
